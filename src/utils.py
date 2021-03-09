@@ -47,17 +47,4 @@ def get_agent_map_data(env):
     env.step({"action": "ToggleMapView", "agentId": 0})
     return to_return
 
-def convert2darknet(item_dict,object_types,imgw=300.0,imgh=300.0,n=0):
-    out_str = ""
-    for k,v in item_dict.items():
-        obj_name = k.split('|')[0]
-        if obj_name in object_types:
-            class_id = object_types.index(obj_name)
-            x = (v[0] + v[2])/2/imgw
-            y = (v[1] + v[3])/2/imgh
-            dw = (v[2] - v[0])/imgw
-            dh = (v[3] - v[1])/imgh
-            if dw*dh > 0.5e-3:            
-                out_str += f"{class_id} {x} {y} {dw} {dh}\n"
-    return out_str         
-            
+
