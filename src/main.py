@@ -1,3 +1,5 @@
+
+
 # import packages
 import argparse
 
@@ -6,7 +8,7 @@ from solver import Solver
 
 
 #  variables
-mode = "sandbox"
+mode = "test"
 seed = 1
 
 data_path = "../data/"
