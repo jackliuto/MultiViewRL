@@ -8,7 +8,7 @@ from solver import Solver
 
 
 #  variables
-mode = "test"
+mode = "train"
 seed = 1
 
 data_path = "../data/"

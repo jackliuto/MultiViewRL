@@ -1,5 +1,3 @@
-# starter code from https://pytorch.org/tutorials/intermediate/mario_rl_tutorial.html
-
 # import package
 import numpy as np
 import time
@@ -85,7 +83,7 @@ class Solver(object):
         modelPath = Path(self.model_path)
         logger = MetricLogger(modelPath)
         dqn_agent = DQNAgent(self.state_dim, len(self.actions),modelPath)
-        episodes = 100
+        episodes = 500
 
 
         with Controller(**self.controller_setting) as c:
@@ -159,7 +157,7 @@ class Solver(object):
         logger = MetricLogger(modelPath)
         dqn_agent = DQNAgent(self.state_dim, len(self.actions),modelPath)
         dqn_agent.load('../model/dqn_20.chkpt')
-        episodes = 1
+        episodes = 1000
 
         gif_array = []
         gif_location = '../test.gif'
@@ -221,77 +219,4 @@ class Solver(object):
 
 
 
-
-
-        # with Controller(**self.controller_setting) as c:
-        #     event = c.step(action='InitialRandomSpawn',randomSeed=0,forceVisible=True)
-        #     event = c.step(action='GetReachablePositions')
-        #     positions = event.metadata['reachablePositions'] 
-        #     n = 0           
-        #     for pos in positions:
-        #         event = c.step(action='Teleport', **pos)                
-        #         for i in range(360//90):   
-        #             n = self.extract_info(event,n)                             
-        #             event = c.step('RotateRight')  
-
-
-            # event = c.step(action='InitialRandomSpawn',randomSeed=0,forceVisible=True)
-            # event = c.step(action='GetReachablePositions')
-            # positions = event.metadata['reachablePositions']
-            # item_list = [o["objectId"].split('|')[0] for o in event.metadata["objects"]]
-            # item_list.sort()
-            # print(item_list)
-            # event = c.step(action=actions[0])
-            # time.sleep(1)
-            # event = c.step(action=actions[0])
-            # time.sleep(1)
-            # event = c.step(action=actions[3])
-            # time.sleep(1)  
-            # positions = c.step(action="GetReachablePositions").metadata["actionReturn"]
-            # print(event.metadata['agent']['rotation'])
-
-            # ## code for generate top down view 
-            # for i in range(0,20):
-            #     event = c.step(action='InitialRandomSpawn',randomSeed=i,forceVisible=True)
-            #     map_view = get_agent_map_data(c)['frame']
-            #     im = Image.fromarray(map_view)
-            #     im.save(self.data_path+'map_small_'+str(i)+'.png')
-
-
-
-
-        print("sandbox")
-
-        # ## code for generate top down view 
-        # for i in range(1,11):
-        #     controller = Controller(scene='FloorPlan20'+str(i), gridSize=0.25, renderObjectImage=True)
-        #     map_view = get_agent_map_data(controller)['frame']
-        #     im = Image.fromarray(map_view)
-        #     im.save(self.data_path+'map20'+str(i)+'.png')
-
-        ## code for testing random location of objects
-        # for i in range(1,11):
-        #     controller = Controller(scene='FloorPlan205', gridSize=0.25, renderObjectImage=True)
-        #     controller.step(action='InitialRandomSpawn',randomSeed=i)
-        #     map_view = get_agent_map_data(controller)['frame']
-        #     im = Image.fromarray(map_view)
-        #     im.save(self.data_path+'map205_'+str(i)+'.png')
-
-        ## code for generate first person view
-        # event = controller.step(action='MoveAhead')
-        # print(event.instance_detections2D)
-        # im = Image.fromarray(event.frame)
-        # im.save(self.data_path+'test1.png')
-
-        ## code for check last action sucess or fail
-        # event.metadata['lastActionSuccess']
-
-        # event = controller.step(action='MoveAhead')
-        # im = Image.fromarray(event.frame)
-        # im.save(self.data_path+'test2.png')
-
-        # event = controller.step(action='MoveAhead')
-        # im = Image.fromarray(event.frame)
-        # im.save(self.data_path+'test3.png')
-        
 

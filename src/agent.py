@@ -31,8 +31,8 @@ class DQNAgent:
         self.save_every = 100
 
         # cache and recall information
-        self.memory = deque(maxlen=10000)
-        self.batch_size = 64
+        self.memory = deque(maxlen=1000)
+        self.batch_size = 128
 
         # TD settings
         self.gamma = 0.9
@@ -43,7 +43,7 @@ class DQNAgent:
         self.loss_fn = torch.nn.SmoothL1Loss()
 
         # learning setting
-        self.burnin = 64 #steps before training
+        self.burnin = 128 #steps before training
         self.learn_every = 3 
 
         
