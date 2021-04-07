@@ -336,7 +336,7 @@ class Solver(object):
         # setup
         mode = "alo"
         model_path = '/home/jackliu/School/CISC856/MultiViewRL/model/alo_view/FloorPlan222/seed_11/100/last.chkpt'
-        max_iteration = 50
+        max_iteration = 20
         episodes = 1
         seed = self.seed
         dataPath = Path(self.data_path) / 'ego_view' / (self.scene+self.other_name)/ ("seed_"+str(seed)) / str(episodes)
@@ -348,8 +348,8 @@ class Solver(object):
         
         gif_array = []
         movie_array = []
-        gif_location = '../alo_best_11.gif'
-        movie_location = '../alo_best_11.mp4'
+        gif_location = '../visuals/alo_best_11.gif'
+        movie_location = '../visuals/alo_best_11.mp4'
 
 
         with Controller(**self.controller_setting) as c:
@@ -384,11 +384,13 @@ class Solver(object):
                     alo_next_state = next_state['alo']
 
                     ###### convert array to gif and movie
-                    im_ego = np.transpose(chosen_state, (1, 2, 0)).numpy()
-                    im_ego = transforms.ToPILImage()(np.uint8(im_ego))
-                    gif_array.append(im_ego)
+                    img = np.transpose(chosen_state, (1, 2, 0)).numpy()
+                    img = transforms.ToPILImage()(np.uint8(img))
+                    gif_array.append(img)
                     # movie_array.append(c.step(action="Done").frame)
                     movie_array.append(np.transpose(chosen_state, (1, 2, 0)).numpy())
+                    # save images
+                    img.save('../visuals/'+str(n)+'.png')
 
 
                     # prepare for next state
