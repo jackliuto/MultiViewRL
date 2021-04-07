@@ -1,0 +1,5 @@
+['Curtains', 'Box', 'Floor', 'Laptop', 'CreditCard', 'Newspaper', 'HousePlant', 'FloorLamp', 'LightSwitch', 
+'RemoteControl', 'Television', 'Painting', 'Pillow', 'KeyChain', 'Painting', 'GarbageCan', 'Watch', 'Window', 
+'Sofa', 'Drawer', 'SideTable', 'ArmChair', 'Sofa', 'SideTable', 'SideTable', 'TVStand', 
+'Drawer', 'Drawer', 'Drawer', 'Drawer', 'Drawer', 'Drawer', 
+'CoffeeTable', 'Statue']

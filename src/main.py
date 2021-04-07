@@ -8,8 +8,8 @@ from solver import Solver
 
 
 #  variables
-mode = "train"
-seed = 1
+mode = "test"
+
 
 data_path = "../data/"
 model_path = "../model/"
@@ -19,8 +19,12 @@ def main(args):
     # np.random.seed(args.seed)
     # random.seed(args.seed)
     solver = Solver(args)
-    if args.mode.lower() == "train":
-        solver.train()
+    if args.mode.lower() == "train_ego":
+        solver.train_ego()
+    elif args.mode.lower() == "train_alo":
+        solver.train_alo()
+    elif args.mode.lower() == "train_double":
+        solver.train_double()
     elif args.mode.lower() == "test":
         solver.test()
     elif args.mode.lower() == "sandbox":
