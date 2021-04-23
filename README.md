@@ -4,10 +4,27 @@ Group 27
 
 To train:
 
+To train Egocentric Agent:
+```
+python src/main.py --mode train_ego
+```
+To train Allocentric Agent:
+```
+python src/main.py --mode train_alo
+```
+To train Double Agent:
+```
+python src/main.py --mode train_double
+```
+To test a policy:
+```
+python src/main.py --mode test
+```
 To output saliency maps:
 ```
 python visuals/saliency_map.py
 ```
+
 
 The repository contains the following:
 - _src_ contains the necessary python files used to train the algorithm. Follow the instructions above to run. 
