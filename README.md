@@ -33,7 +33,7 @@ The repository contains the following:
 - _visuals_ contains the necessary files to generate saliency maps using the model checkpoints 
 
 ## Example of a trained agent
-![ego_best_11](https://user-images.githubusercontent.com/14166685/115814987-1ff50180-a3c4-11eb-9aaf-842642f3d137.gif)
+![ego_best_1](https://user-images.githubusercontent.com/14166685/115815051-4155ed80-a3c4-11eb-964d-9fee9e6e31fa.gif)
 ![alo_best_1](https://user-images.githubusercontent.com/14166685/115814969-18cdf380-a3c4-11eb-91e0-06e6e0f59b76.gif)
 
 
