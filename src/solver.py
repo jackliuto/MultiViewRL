@@ -1,3 +1,6 @@
+# This file contrains our code to genrate state action reward from AI2Thor
+# It is also the file that does Deep Q leanring via updating Q values
+
 # import package
 import numpy as np
 import time
