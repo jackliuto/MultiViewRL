@@ -10,27 +10,27 @@ from network import DQN, DQNTwo
 
 class DQNAgent:
     def __init__(self, state_dim, action_dim, save_dir):
-        # initial conditions
+        # Sets initial conditions
         self.state_dim = state_dim
         self.action_dim = action_dim
         self.save_dir = save_dir
         self.use_cuda = torch.cuda.is_available()
 
-        # load models
+        # Load the DQN model
         self.net = DQN(self.state_dim,self.action_dim).float()
         if self.use_cuda:
             self.net = self.net.to(device="cuda")
         
-        # setting exploartion rate
+        # Set exploration rate, decay and minimum 
         self.exploration_rate = 1
         self.exploration_rate_decay = 0.99995
         self.exploration_rate_min = 0.1
         self.curr_step = 0
         
-        # setting saving rate
+        # Set saving rate
         self.save_every = 1000
 
-        # cache and recall information
+        # Cache and recall information
         self.memory = deque(maxlen=1000)
         self.batch_size = 64
 
@@ -63,11 +63,11 @@ class DQNAgent:
             action_values = self.net(state)
             action_idx = torch.argmax(action_values,axis=1).item()
         
-        # decrease exploration rate
+        # Decrease exploration rate
         self.exploration_rate *= self.exploration_rate_decay
         self.exploration_rate = max(self.exploration_rate_min, self.exploration_rate)
 
-        # incrment step size
+        # Increment step size
         self.curr_step += 1
 
         return action_idx
@@ -94,6 +94,7 @@ class DQNAgent:
         return action_idx
 
     def cache(self, state, next_state, action, reward, done):
+        ## Store the state, next_state, action, reward and done so that it can be retrieved later.
         state = state.__array__()
         next_state = next_state.__array__()
 
@@ -113,16 +114,19 @@ class DQNAgent:
         self.memory.append((state, next_state, action, reward, done))
 
     def recall(self):
+        ## Randomly sample information from the memory 
         batch = random.sample(self.memory, self.batch_size)
         state, next_state, action, reward, done = map(torch.stack, zip(*batch))
         return state, next_state, action.squeeze(), reward.squeeze(), done.squeeze()
 
     def td_estimate(self, state, action):
+        ## Estimate the current Q-Value
         current_Q = self.net(state)[np.arange(0,self.batch_size), action] 
         return current_Q
     
     @torch.no_grad()
     def td_target(self, reward, next_state, done):
+        ## Calculate the TD Target
         next_state_Q = self.net(next_state)
         best_action = torch.argmax(next_state_Q, axis=1)
         next_Q = self.net(next_state)[
@@ -131,6 +135,7 @@ class DQNAgent:
         return (reward + (1 - done.float()) * self.gamma * next_Q).float()
 
     def update_Q(self, td_estimate, td_target):
+        ## Backpropagate error through the Q-network
         loss = self.loss_fn(td_estimate, td_target)
         self.optimizer.zero_grad()
         loss.backward()
@@ -138,15 +143,18 @@ class DQNAgent:
         return loss.item()
 
     def save(self):
+        ## Save a checkpoint
         save_path = (self.save_dir / f"dqn_{int(self.curr_step // self.save_every)}.chkpt")
         torch.save(dict(model=self.net.state_dict(), exploration_rate=self.exploration_rate), save_path)
         print(f"DQN saved to {save_path} at step {self.curr_step}")
     
     def save_last(self):
+        ## Save the final checkpoint
         save_path = (self.save_dir / f"last.chkpt")
         torch.save(dict(model=self.net.state_dict(), exploration_rate=self.exploration_rate), save_path)
 
     def load(self, load_path):
+        ## load a checkpoint
         if os.path.isfile(load_path):
             checkpoint = torch.load(load_path)
             self.exploration_rate = checkpoint['exploration_rate']
