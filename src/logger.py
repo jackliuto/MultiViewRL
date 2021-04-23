@@ -1,3 +1,5 @@
+# This file logs the output of the agent while training
+
 import numpy as np 
 import time, datetime
 import matplotlib.pyplot as plt 
