@@ -6,7 +6,7 @@ To train:
 
 To output saliency maps:
 ```
-python saliency_map.py
+python visuals/saliency_map.py
 ```
 
 The repository contains the following:
