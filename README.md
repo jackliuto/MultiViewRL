@@ -9,5 +9,5 @@ To output saliency maps:
 The repository contains the following:
 - _src_ contains the necessary python files used to train the algorithm. Follow the instructions above to run. 
 - _model_samples_ contains model checkpoints for the easy and hard conditions each trained on egocentric only, allocentric only and combined perspective.
-- _visuals_ contains the necessary files to generate saliency maps using the model checkpoints and GradCam
+- _visuals_ contains the necessary files to generate saliency maps using the model checkpoints 
 
