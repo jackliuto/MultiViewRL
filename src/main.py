@@ -1,4 +1,4 @@
-
+# This is a commandline program that make sure we can run our code on server
 
 # import packages
 import argparse
