@@ -5,8 +5,9 @@ Group 27
 To train:
 
 To output saliency maps:
-
+```
 python saliency_map.py
+```
 
 The repository contains the following:
 - _src_ contains the necessary python files used to train the algorithm. Follow the instructions above to run. 
